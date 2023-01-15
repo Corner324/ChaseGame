@@ -27,13 +27,13 @@ public class Sand : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
+    // Запуск скрипта
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    // Каждый кадр
     void Update()
     {
         

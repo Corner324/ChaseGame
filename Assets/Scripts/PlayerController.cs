@@ -13,26 +13,27 @@ public class PlayerController : MonoBehaviour
     float moveVertical;
 
     public Animator animator;
+    public Joystick joystick;
 
     public Rigidbody2D rb;
     public SpriteRenderer sprite;
 
     public static PlayerController Instance {get; set;}
 
-
+    // Запуск игры
     public void Awake(){
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         Instance = this;
     }
 
-    // Start is called before the first frame update
+    // Запуск скрипта
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    // Каждый кадр
     void Update()
     {
         animator.SetFloat("HorizontalMove", Math.Abs(moveHorizontal));
@@ -52,10 +53,16 @@ public class PlayerController : MonoBehaviour
         //JumpLogic();
     }
 
+    // Передвижение
     private void MovementLogic()
     {
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
+
+        moveHorizontal = joystick.Horizontal;
+        moveVertical = joystick.Vertical;
+
+        // moveHorizontal = Input.GetAxis("Horizontal");
+        // moveVertical = Input.GetAxis("Vertical");
+        
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
         transform.Translate(movement * speed * Time.fixedDeltaTime);
@@ -63,15 +70,19 @@ public class PlayerController : MonoBehaviour
         //rb.AddForce(movement * speed);
     }
 
-    public void GetDamage(){
-        lives -= 1;
-        Debug.Log(lives);
-    }
-
+    // Прыжок
     private void Jump(){
 
         rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
 
     }
+
+    // Получение урона
+    public void GetDamage(){
+        lives -= 1;
+        Debug.Log(lives);
+    }
+
+    
 
 }

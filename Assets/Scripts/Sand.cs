@@ -10,6 +10,9 @@ public class Sand : MonoBehaviour
         if (collider.gameObject == PlayerController.Instance.gameObject){
             PlayerController.speed = 3f;
         }
+        if (collider.gameObject == EnemyController.Instance.gameObject){
+            PlayerController.speed = 2f;
+        }
 
     }
 
@@ -17,6 +20,9 @@ public class Sand : MonoBehaviour
 
         if (collider.gameObject == PlayerController.Instance.gameObject){
             PlayerController.speed = 6f;
+        }
+        if (collider.gameObject == EnemyController.Instance.gameObject){
+            PlayerController.speed = 3f;
         }
 
     }

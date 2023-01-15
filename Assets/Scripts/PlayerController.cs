@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     public static float speed = 6f;
     public int lives = 5;
     public float jumpForce = 15f;
+
+    float moveHorizontal;
+    float moveVertical;
+
+    public Animator animator;
 
     public Rigidbody2D rb;
     public SpriteRenderer sprite;
@@ -29,7 +35,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetFloat("HorizontalMove", Math.Abs(moveHorizontal));
+
+        if(Input.GetAxis("Horizontal") < 0){
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+        }
+        if(Input.GetAxis("Horizontal") > 0){
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+        }
         
     }
 
@@ -41,8 +54,8 @@ public class PlayerController : MonoBehaviour
 
     private void MovementLogic()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        moveHorizontal = Input.GetAxis("Horizontal");
+        moveVertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
         transform.Translate(movement * speed * Time.fixedDeltaTime);

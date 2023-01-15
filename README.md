@@ -1,2 +1,2 @@
-# ChaseGame 123
+# ChaseGame
 https://github.com/Corner324/ChaseGame

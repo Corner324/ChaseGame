@@ -5,7 +5,7 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    public static float speed = 6f;
+    public static float speed = 3f;
     public int lives = 5;
     public float jumpForce = 15f;
 
@@ -38,12 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetFloat("HorizontalMove", Math.Abs(moveHorizontal));
 
-        if(Input.GetAxis("Horizontal") < 0){
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
-        }
-        if(Input.GetAxis("Horizontal") > 0){
-            GetComponentInChildren<SpriteRenderer>().flipX = false;
-        }
+        FlipX();
         
     }
 
@@ -51,6 +46,18 @@ public class PlayerController : MonoBehaviour
     {
         MovementLogic();
         //JumpLogic();
+        
+    }
+
+    private void FlipX(){
+        
+        if(joystick.Horizontal < 0){
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+        }
+        else if(joystick.Horizontal > 0){
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+        }
+
     }
 
     // Передвижение

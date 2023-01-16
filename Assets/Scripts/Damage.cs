@@ -5,10 +5,15 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
 
+    
+    AudioSource audioSource;
+
     private void OnCollisionEnter2D(Collision2D collision){
 
         if (collision.gameObject == PlayerController.Instance.gameObject){
             PlayerController.Instance.GetDamage();
+            audioSource.Play();
+            
         }
 
     }
@@ -16,7 +21,7 @@ public class Damage : MonoBehaviour
     // Запуск скрипта
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Каждый кадр

@@ -44,7 +44,6 @@ public class EnemyController : MonoBehaviour
     // Каждый кадр
     void FixedUpdate()
     {
-        // transform.position = Vector2.MoveTowards(transform.position,player.position, speed*Time.fixedDeltaTime);
         
     }
 
@@ -63,6 +62,11 @@ public class EnemyController : MonoBehaviour
             
         }
 
+    }
+
+    IEnumerator waiter(float time)
+    {
+       yield return new WaitForSeconds(time); 
     }
 
     private void FlipX(){

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public Joystick joystick;
 
     public Rigidbody2D rb;
-    public SpriteRenderer sprite;
+    private SpriteRenderer sprite;
 
     public static PlayerController Instance {get; set;}
 
@@ -67,14 +67,11 @@ public class PlayerController : MonoBehaviour
         moveHorizontal = joystick.Horizontal;
         moveVertical = joystick.Vertical;
 
-        // moveHorizontal = Input.GetAxis("Horizontal");
-        // moveVertical = Input.GetAxis("Vertical");
         
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
         transform.Translate(movement * speed * Time.fixedDeltaTime);
 
-        //rb.AddForce(movement * speed);
     }
 
     // Прыжок
@@ -88,7 +85,20 @@ public class PlayerController : MonoBehaviour
     public void GetDamage(){
         lives -= 1;
         Debug.Log(lives);
+        
+        StartCoroutine(visualDamage());
     }
+
+    public IEnumerator visualDamage(){
+
+        sprite.color = new Color(1.0f, 0.503f, 0.503f);
+        yield return new WaitForSeconds(0.5f); 
+        sprite.color = new Color(1.0f, 1.0f, 1.0f);  
+
+    }
+
+    
+    
 
     
 

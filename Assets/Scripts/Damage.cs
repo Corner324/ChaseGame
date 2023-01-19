@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Damage : MonoBehaviour
 {
 
@@ -13,10 +14,9 @@ public class Damage : MonoBehaviour
         if (collision.gameObject == PlayerController.Instance.gameObject){
             PlayerController.Instance.GetDamage();
             audioSource.Play();
-            
         }
-
     }
+
 
     // Запуск скрипта
     void Start()

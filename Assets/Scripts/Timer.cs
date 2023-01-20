@@ -27,7 +27,7 @@ private float timeLeft;
         if(timeLeft > 0){
             timeLeft -= Time.deltaTime;
             timerBar.fillAmount = timeLeft / maTime;
-            textTime.GetComponent<Text>().text = Convert.ToString(Math.Round(timeLeft,0)) + " seconds";
+            textTime.GetComponent<Text>().text = Convert.ToString(Math.Round(timeLeft,0)) + " секунд";
 
             if(timeLeft < 4){
                 textTime.GetComponent<Text>().color = Color.red;

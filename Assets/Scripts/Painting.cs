@@ -9,11 +9,12 @@ public class Painting : MonoBehaviour
 
 
     public GameObject obj;
-    private int counter = 0, maxCount = 1000;
+    private int counter = 0, counter2 = 0, maxCount = 1000;
     private bool isSave;
     public float paintStock = 1.0f;
     public Image timerBar;
-    private List<GameObject> points = new List<GameObject>();
+    public List<GameObject> points = new List<GameObject>();
+
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class Painting : MonoBehaviour
             if(paintStock > 0)
             {
                 Draw();
+                Optimize();
             }
 		}
     }
@@ -37,31 +39,27 @@ public class Painting : MonoBehaviour
 		Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
-        Debug.Log("Screen - " + screenPosition);
+        if(worldPosition[0] < -6.2f && worldPosition[1] < -1.5f)
+            return;
+
         Debug.Log("World - " + worldPosition);
+
 
         points.Add(Instantiate(obj, worldPosition, Quaternion.identity) as GameObject);
         counter++;
-
-        //NewObject.AddComponent<CircleCollider2D>();
-        //NewObject.AddComponent<UnityEngine.AI.NavMeshObstacle>();
-        //Debug.Log(s.GetComponent<UnityEngine.AI.NavMeshObstacle>().carve);
-        //NewObject.GetComponent<SpriteRenderer>.sortingOrder = 10;
         
         timerBar.fillAmount = paintStock;
-
         
-        paintStock -= 0.005f;
-        Debug.Log("PaintStock - " + paintStock);
-
-
-        // TODO: Автоудаление объектов //
-
-        if(counter > 20){
-            Destroy(points[points.Count]);
-        }
-
-        // НЕ УДАЛЯЕТ!!!!
+        paintStock -= 0.005f;  
         
 	}
+
+    void Optimize(){
+        // TODO: Автоудаление объектов //
+        if(counter > 20 && (counter2 < points.Count)){
+            Destroy(points[counter2]);
+            counter2++;
+        }
+
+    }
 }

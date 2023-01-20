@@ -67,9 +67,7 @@ public class PlayerController : MonoBehaviour
         moveHorizontal = joystick.Horizontal;
         moveVertical = joystick.Vertical;
 
-        
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
-
         transform.Translate(movement * speed * Time.fixedDeltaTime);
 
     }

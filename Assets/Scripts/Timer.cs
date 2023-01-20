@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -8,8 +9,9 @@ public class Timer : MonoBehaviour
 {
 
 Image timerBar;
+public Text textTime;
 public float maTime = 20f;
-float timeLeft;
+private float timeLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -21,11 +23,14 @@ float timeLeft;
     // Update is called once per frame
     void Update()
     {
+        
         if(timeLeft > 0){
             timeLeft -= Time.deltaTime;
             timerBar.fillAmount = timeLeft / maTime;
+            textTime.GetComponent<Text>().text = Convert.ToString(Math.Round(timeLeft,0));
         }
         else{
+            textTime.GetComponent<Text>().text = "GameOver";
             // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
